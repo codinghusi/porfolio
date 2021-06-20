@@ -1,7 +1,14 @@
 import { getChildrenByType } from 'react-nanny';
 import styled, { css } from 'styled-components';
 
-const NavBar = styled.ul`
+const NavBar = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 0 2rem;
+    margin: 0;
+
     position: fixed;
     left: 0;
     top: 0;
@@ -10,15 +17,20 @@ const NavBar = styled.ul`
     margin: 0;
 
     background-color: lightgray;
+`;
 
+const NavBarList = styled.ul`
     display: flex;
     flex-direction: row;
+
+    margin: 0;
+    padding: 0;
+
     list-style: none;
 `;
 
 const NavItem = styled.li`
     padding: 0 1rem;
-    background-color: white;
     margin: 0 0.5rem;
 
     ${({active}) => active && css`
@@ -44,8 +56,8 @@ export default function Nav({ children }) {
     const activeItem = itemsData.find(item => item.isActive);
     const title = activeItem?.name ?? 'the title';
 
-    const navItems = itemsData.map(({ href, name }, i) => (
-        <NavItem key={i.toString()}>
+    const navItems = itemsData.map(({ href, name, isActive }, i) => (
+        <NavItem key={i.toString()} active={isActive}>
             <a href={href}>
                 {name}
             </a>
@@ -55,8 +67,9 @@ export default function Nav({ children }) {
     return (
         <NavBar>
             <NavTitle> {title} </NavTitle>
-
-            {navItems}
+            <NavBarList>
+                {navItems}
+            </NavBarList>
         </NavBar>
     );
 }

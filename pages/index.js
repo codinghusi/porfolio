@@ -3,9 +3,6 @@ import Test from '../components/test';
 
 export default function Landing() {
   return (
-    //   <div>
-    //       <Test />
-    //   </div>
     <OnePager>
         <Page title="Home" active>
             <p>Page: Home</p>
